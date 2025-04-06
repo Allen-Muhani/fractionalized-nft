@@ -4,8 +4,9 @@ pragma solidity ^0.8.22;
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract IRECFractions is ERC20, ERC20Burnable, Ownable {
+contract IRECFractions is ERC20, ERC20Burnable, Ownable, ReentrancyGuard {
     /**
      * This should be the 1 mega whatt required per certificate.
      */
@@ -56,7 +57,7 @@ contract IRECFractions is ERC20, ERC20Burnable, Ownable {
      * Buy tokens from this smart contract.
      * @param tokenAmount the IRECFractions to buy.
      */
-    function buy(uint256 tokenAmount) public {
+    function buy(uint256 tokenAmount) public nonReentrant {
         require(tokenAmount >= 1000, "Amount must be more than 0.1 KW");
         require(
             tokenAmount <= A_THOUSAND_KW_IN_WHATS,
@@ -84,7 +85,7 @@ contract IRECFractions is ERC20, ERC20Burnable, Ownable {
      * Sell tokens to this smart contract.
      * @param tokenAmount the IRECFractions to buy.
      */
-    function sell(uint256 tokenAmount) public {
+    function sell(uint256 tokenAmount) public nonReentrant {
         require(tokenAmount >= 1000, "Amount must be more than 0.1 KW");
         uint256 totalUSDC = tokenAmount * priceInUsdc;
         require(
