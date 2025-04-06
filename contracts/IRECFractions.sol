@@ -7,12 +7,31 @@ import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC2
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract IRECFractions is ERC20, ERC20Burnable, Ownable {
-    constructor(address initialOwner)
-        ERC20("I-REC Fractions", "I-RECFraction")
-        Ownable(initialOwner)
-    {}
+    address certificateAddress;
+    uint256 certificateId;
+
+    event Buy();
+    event Sell();
+    event Mint();
+
+    constructor(
+        address initialOwner,
+        address _certificateAddress,
+        uint256 _certificateId
+    ) ERC20("I-REC Fractions", "I-RECFraction") Ownable(initialOwner) {
+        certificateAddress = _certificateAddress;
+        certificateId = _certificateId;
+    }
+
+    function mintTo(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
+
+    function buy() public {}
+
+    function sell() public {}
 }
