@@ -18,7 +18,6 @@ contract IRECCertificate is
      */
     uint256 public nextCertificateId;
 
-    mapping(uint256 => string) private certificateDetails;
     mapping(uint256 => address) private fractionErc20Token;
 
     // Event to emit certificate details when minted
@@ -44,18 +43,6 @@ contract IRECCertificate is
         _setTokenURI(tokenId, uri);
         emit CertificateMinted(tokenId, uri);
         return tokenId;
-    }
-
-    /**
-     * Get certificate details other than ID.
-     * @param _certificateId the certificate id.
-     * @return the extra cetrtificate details.
-     */
-    function getCertificateDetails(
-        uint256 _certificateId
-    ) public view returns (string memory) {
-        require(_exists(_certificateId), "Certificate does not exist.");
-        return certificateDetails[_certificateId];
     }
 
     /**
