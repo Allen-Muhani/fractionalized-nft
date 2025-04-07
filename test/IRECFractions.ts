@@ -62,10 +62,6 @@ describe("IRECFractions", function () {
       let fractionsAddress = await irceCertFractions.getAddress();
       await usdc.approve(fractionsAddress, 10000000000000);
 
-      const x = await irceCertFractions.balanceOf(fractionsAddress);
-
-      console.log("============>", x, fractionsAddress);
-
       // Buy tokens
       await expect(irceCertFractions.buy(one_killo_watt))
         .to.emit(irceCertFractions, "Buy")

@@ -16,17 +16,13 @@ contract IRECCertificate is
     /**
      * Used to track the token/cert id.
      */
-    uint256 private nextCertificateId;
+    uint256 public nextCertificateId;
 
     mapping(uint256 => string) private certificateDetails;
     mapping(uint256 => address) private fractionErc20Token;
 
     // Event to emit certificate details when minted
-    event CertificateMinted(
-        uint256 tokenId,
-        string certificateDetails,
-        string uri
-    );
+    event CertificateMinted(uint256 tokenId, string uri);
     event CertificateFractionalized(address erc20Address, uint256 tokenId);
 
     constructor(
@@ -36,20 +32,17 @@ contract IRECCertificate is
     /**
      * Mints new nfts given owner, certificate details, uri.
      * @param owner the owner of the nft.
-     * @param otherDetails other details of the certificate.
      * @param uri the certificate document/image uri.
      * @return the nft id/certificate id.
      */
     function safeMint(
         address owner,
-        string memory otherDetails,
         string memory uri
     ) public onlyOwner returns (uint256) {
         uint256 tokenId = nextCertificateId++;
         _safeMint(owner, tokenId);
         _setTokenURI(tokenId, uri);
-        certificateDetails[tokenId] = otherDetails;
-        emit CertificateMinted(tokenId, otherDetails, uri);
+        emit CertificateMinted(tokenId, uri);
         return tokenId;
     }
 

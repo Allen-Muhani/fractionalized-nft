@@ -34,10 +34,9 @@ describe("IRECCertificate", function () {
         deployIRECCertificateFixture
       );
 
-      await expect(irceCert.safeMint(otherAccount, "TestDetails", "TestURI"))
+      await expect(irceCert.safeMint(otherAccount, "TestURI"))
         .to.emit(irceCert, "CertificateMinted")
-        .withArgs(0, "TestDetails", "TestURI");
-      expect(await irceCert.getCertificateDetails(0)).to.equal("TestDetails");
+        .withArgs(0, "TestURI");
     });
 
     it("Fractionalize minted token", async function () {
@@ -45,10 +44,9 @@ describe("IRECCertificate", function () {
         deployIRECCertificateFixture
       );
 
-      await expect(irceCert.safeMint(otherAccount, "TestDetails", "TestURI"))
+      await expect(irceCert.safeMint(otherAccount, "TestURI"))
         .to.emit(irceCert, "CertificateMinted")
-        .withArgs(0, "TestDetails", "TestURI");
-      expect(await irceCert.getCertificateDetails(0)).to.equal("TestDetails");
+        .withArgs(0, "TestURI");
 
       await expect(irceCert.fractionalize(0)).to.emit(
         irceCert,
