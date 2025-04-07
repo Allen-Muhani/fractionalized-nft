@@ -18,7 +18,7 @@ contract IRECCertificate is
      */
     uint256 public nextCertificateId;
 
-    mapping(uint256 => address) private fractionErc20Token;
+    mapping(uint256 => address) public fractionErc20Token;
 
     // Event to emit certificate details when minted
     event CertificateMinted(uint256 tokenId, string uri);
