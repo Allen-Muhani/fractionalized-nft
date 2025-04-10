@@ -6,8 +6,11 @@ Try running some of the following tasks:
 
 Make sure to set up your private key in the .env file as follows
 
+```shell
 PRIVATE_KEY_1=private key 1
 PRIVATE_KEY_2=private key 2
+```
+
 
 ```shell
 npx hardhat help
